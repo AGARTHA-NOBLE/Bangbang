@@ -1,7 +1,7 @@
 import http.client
 import json
 import time
-import argparse
+import keys
 from coinbase.wallet.client import Client
 
 # API secret FCXJGm8k998SGEN06yqgY7IkNW4szhBw 
@@ -45,21 +45,10 @@ def spawnTx(order_id, product_name, transaction_type):
 
 def main():
 
-    parser = argparse.ArgumentParser(
-        prog="Bangbang"
-        description="A program for simple trades with simple boundaries."
-    )
-    parser.add_argument("api_key", type=str, dest='api_key')
-    parser.add_argument("api_secret", type=str, dest='api_secret')
-    parser.add_argument("user_UUID", type=str, dest='user_uuid')
-    arguments = parser.parse_args()
-    api_key = arguments.a
-
-   client = Client(api_key, args) 
-    
     order_id = 0
-    coinbase_API_key = args.api_key
-    coinbase_user_UUID = args.user_uuid
+    coinbase_API_key = keys.coinbase_api_key
+    coinbase_API_secret = keys.coinbase_api_secret
+    coinbase_user_UUID = 
 
     buy_limit = 0.07
     sell_limit = 0.10
