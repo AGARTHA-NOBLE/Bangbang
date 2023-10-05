@@ -1,3 +1,5 @@
 from strategies import *
 
-Bangbang("DOGE-USD")
+DOGE = Asset("DOGE-USD", 0.04, 0.10)
+
+Bangbang(DOGE)

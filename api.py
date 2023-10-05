@@ -7,7 +7,7 @@ import hashlib
 import keys
 from classes import Request
 
-def authorizedRESTRequest(request):
+def authorized_REST_request(request):
     conn = http.client.HTTPSConnection("api.coinbase.com")
     timestamp = int(time.time())
     presig = str(timestamp) + request.method + request.requestPath
@@ -30,48 +30,48 @@ def authorizedRESTRequest(request):
 
 def getUserAccounts():
     newReq = Request("GET", "/v3/brokerage/accounts", '', '')
-    result = authorizedRESTRequest(newReq)
+    result = authorized_REST_request(newReq)
     print(result.decode("utf-8"))
 
 def getUserAuth():
     newReq = Request("GET", "/user/auth", '', '')
-    result = authorizedRESTRequest(newReq)
+    result = authorized_REST_request(newReq)
     print(result.decode("utf-8"))
 
 
-def getAllProducts():
+def get_all_products():
     # Get a list of all market offerings.
     newReq = Request("GET", "/api/v3/brokerage/products", '', '')
-    result = authorizedRESTRequest(newReq)
+    result = authorized_REST_request(newReq)
     return(result.decode("utf-8"))
 
 
-def currentAccountBalance():
+def current_account_balance():
     # Get a list of all wallets (accounts) for the currently authorized user.
     newReq = Request("GET", "/api/v3/brokerage/accounts", '', '')
-    result = authorizedRESTRequest(newReq)
+    result = authorized_REST_request(newReq)
     print(result.decode("utf-8"))
 
-def bidAskTest():
+def bid_ask_test():
     newReq = Request("GET", "/api/v3/brokerage/best_bid_ask", '', '')
-    result = authorizedRESTRequest(newReq)
+    result = authorized_REST_request(newReq)
     print(result.decode("utf-8"))
 
 
-def currentAssetPrice(assetPair):
+def best_asset_price(assetPair):
     # Get the current price for the provided asset pair.
     queryParams = "?product_ids=" + assetPair
     newReq = Request("GET", "/api/v3/brokerage/best_bid_ask", '', queryParams)
-    result = authorizedRESTRequest(newReq)
-    print(result.decode("utf-8"))
+    result = authorized_REST_request(newReq)
+    return(result.decode("utf-8"))
 
 
-def spawnTx(order_id, product_name, transaction_type):
+def spawnTx(order):
     payload = json.dumps({
-    "side": transaction_type,
-    "client_order_id": order_id,
-    "product_id": product_name 
+    "side": order.transaction_type,
+    "client_order_id": order.order_id,
+    "product_id": order.product_name 
     })    
     newReq = Request("POST", "/api/v3/brokerage/orders", payload, None)
-    result = authorizedRESTRequest(newReq)
+    result = authorized_REST_request(newReq)
     print(result.decode("utf-8"))
