@@ -1,3 +1,3 @@
-from Bangbang import getAllProducts, spawnTx, currentAssetPrice, currentAccountBalance
+from strategies import *
 
-currentAssetPrice("doge-usd")
+Bangbang("DOGE-USD")

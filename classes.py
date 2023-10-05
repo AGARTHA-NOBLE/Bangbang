@@ -9,8 +9,8 @@ class Asset:
 
 
 class Request:
-    def __init__(self, method, requestPath, payload, pairName) -> None:
+    def __init__(self, method, requestPath, payload, queryParams) -> None:
         self.method = method
         self.requestPath = requestPath
         self.payload = payload
-        self. p= 
+        self.queryParams = queryParams
